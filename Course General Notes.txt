@@ -23,7 +23,7 @@ sizes are more expensive to fabricate.
 	Class 1: No requirement for via annular ring size, intended for throwaway projects
 	Class 2: Via annular ring must be atleast 4 mils thick. In other words, it must be the drill diameter
 	+ 8 mils. Intended for longterm use and must be reliable.
-	Class 3: Deployed where human lives will be at risk (military, aerospace). Annular ring must be 5 mils 	thick minimum. Via pad diameter must be drill diameter + 	 8 mils.
+	Class 3: Deployed where human lives will be at risk (military, aerospace). Annular ring must be 5 mils 	thick minimum. Via pad diameter must be drill diameter 8 mils.
 19. When routing, press * to place a via
 20. Press tab to pause the tool to adjust settings or parameters
 21. Teardrops on vias help reliability during manufacturing by adding a thicker connection to the via and trace. If
