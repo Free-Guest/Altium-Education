@@ -1,0 +1,31 @@
+Altium Education Notes
+
+1. Have a list of back up parts to send to the manufacturer ahead of time instead of waiting for them to tell you something is out of stock
+2. When designing the board shape, you can navigate to the properties tab and set a x/y grid increment instead of having to change a global grid size
+3. Check stack up early with fabricator
+4. Order components early in a design, especially mcus and other critical ICs
+5. Hover over an trace and hold the shift key, this allows for you to see everything this trace connects to
+6. Shift s selects a single layer
+7. shift * lets you scroll through multiple layers
+8. Trace width is determined if a signal is highspeed or lowspeed. If it is highspeed then the trace width will depend on the characteristic impedance. Low speed it should be wide enough to carry enough current and satisfy the fabricators manufacturability requirements (7-12mils).
+9. If a trace carries more than about 1A of current, consider using a polygon pour.
+10. Typical trace width values to consider using: 5 mil minimum, 10 mil preferred, 20 mil maximum
+11. SMT entry refers to the size of the trace entering the pad of the componet. Ideally, you should make sure the trace is not larger then the pad size it is entering.
+12. If the width of the trace is as wide as the width of the pad of the component, the trace should enter directly into the pad (no angles, straight in)
+13. If the trace width needs to stay a certain width for impedance or current carrying capacity, then consider getting as close to the pad as possible then making a small portion of the trace small enough to route into the pad 
+and obey clearance requirements. 
+14. You can enable automatic polygon repour using the general settings menu
+15. Minimum via drilled hole size for manufacturability is 8 mils. 10-12 mils is most common. Smaller drill
+sizes are more expensive to fabricate.
+16. When designing the pad or anular ring size, keep in mind the maximum trace width used to define it's size
+17. When routing a trace into a via, you should make sure it is routed straight in and not at a angle
+18. IPC-6012 standard for via fabrication:
+	Class 1: No requirement for via annular ring size, intended for throwaway projects
+	Class 2: Via annular ring must be atleast 4 mils thick. In other words, it must be the drill diameter
+	+ 8 mils. Intended for longterm use and must be reliable.
+	Class 3: Deployed where human lives will be at risk (military, aerospace). Annular ring must be 5 mils 	thick minimum. Via pad diameter must be drill diameter + 8 mils.
+19. When routing, press * to place a via
+20. Press tab to pause the tool to adjust settings or parameters
+21. Teardrops on vias help reliability during manufacturing by adding a thicker connection to the via and trace. If
+you used the same size trace and annular ring, you don't neccesarily need tear drops.
+22. You can use tear drops by going to the tools menu and selecting teardrops
