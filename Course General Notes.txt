@@ -23,9 +23,46 @@ sizes are more expensive to fabricate.
 	Class 1: No requirement for via annular ring size, intended for throwaway projects
 	Class 2: Via annular ring must be atleast 4 mils thick. In other words, it must be the drill diameter
 	+ 8 mils. Intended for longterm use and must be reliable.
-	Class 3: Deployed where human lives will be at risk (military, aerospace). Annular ring must be 5 mils 	thick minimum. Via pad diameter must be drill diameter 8 mils.
+	Class 3: Deployed where human lives will be at risk (military, aerospace). Annular ring must be 5 mils 		thick minimum. Via pad diameter must be drill diameter 	+ 8 mils.
 19. When routing, press * to place a via
 20. Press tab to pause the tool to adjust settings or parameters
 21. Teardrops on vias help reliability during manufacturing by adding a thicker connection to the via and trace. If
 you used the same size trace and annular ring, you don't neccesarily need tear drops.
 22. You can use tear drops by going to the tools menu and selecting teardrops
+23. You can display the clearance boundaries during routing by selecting ctrl w
+24. Coplanar means that you have ground pour nearby traces
+25. An important design rule for signal integrity is to connect all ground regions used to support routing together with vias or direct connections with copper
+26. Important design rules for routing single ended and differential pairs:
+	-The required width of each trace
+	-The spacing between traces (differential pairs)
+	-The maximum allowed difference in length of each trace (clock skew/length matching)
+	-Maximum deviation from the ground plane
+27. To set impedance rules to specific nets, go to pcb rules, routing and width and use the net menu to select a profile
+28. You can use net classes to enforce a specific width to a group of nets
+29. In highspeed designs, it is reccomended to place a ground via nearby whenever you use a via to change layers
+30. For i2c, the total current in the bus should be less than 3 mA
+31. When sizing pullup resistors for i2c, make sure they are sized to limit the current to under 3 mA. Typically it's safe to size so that current is right under 3mA so the rise and fall time do not interfere with other signals
+32. Formula for calculating i2c pull up resistors:
+	
+	((vcc-0.4v)/0.003A) < Rp < (trise/(0.8473*Cb))
+	
+	-vcc: supply voltage
+	-Rp: pullup resistor
+	-trise: rise time of signal
+	-cb: capacitance of the bus
+
+	This is for a 30% to 70% transition time. For 10% to 90%, replace 0.8473 with 2.2.
+
+33. Rule of thumb for i2c routing is to try and use around 10 mil traces with no longer than 10 cm routes
+34. For spi in cases where lines are very long and termination is needed, palce a 22 ohm resistor and the beginning of traces and a resistor equal to the trace impedance (50 ohm) in parallel to ground at the end of traces.
+35. Uart is generally robust and can be routed over long distances.
+36. Examples of high and low speed interfaces:
+	Low Speed: SPI, UART, I2C, I2S, CAN bus, Ethernet(10Base, 100Base)
+	High Speed: USB, LVDS, HDMI, MIPI, Gigabit Ethernet, DDR, PCIe, SATA
+37. Impedance matching or termination is the practice of setting the entire length of the trace to have the same impedance to avoid line losses such as reflections.
+38. Since signals on the pcb are electromagnetic waves and travel at the speed of light, it is necessary to determine the length of which the signal travels during it's rise time. If the trace length is shorter than the distance the signal travels during it's rise time than termination is not needed. This is because, from the perspective of the load component in the above example, the signal looks like and behaves like a slowly-rising DC voltage. From the signal’s perspective, the component begins reacting to the signal at the very instant electromagnetic power is distributed across the interconnect. This means that the signal behavior is dominated by the load’s impedance and not the trace’s impedance.
+39. If the trace is longer then the distance the signal travels during the duration that the signal travels then the trace will need to be designed to a specific impedance. The signal transition is so fast that the signal only interacts with the trace during its rising and falling transitions. It has no interaction with the load during these times, and the entire signal must travel down to the end of the trace before there can be any interaction with the load. Because of this, the signal is only interacting with the trace, and so we need to make sure the trace impedance has the right value
+40. For basic cmos logic circuits, the source input impeance is high around 1 Mohm and the output or load impedance is low around 0.1 ohms. The general scheme for impedance mismatches is to add matching resistors at the source and load ends in series and parallel respectively.
+41. Components meant for high speed signaling often have on chip termination which means termination resistors aren't necessary at times. 
+42. For spi or i2c, termination needs to be applied manually only when the trace length is very long. 
+43. Ansys simulation tools are popular applications for simulating emi and other signal integrity problems in a design
